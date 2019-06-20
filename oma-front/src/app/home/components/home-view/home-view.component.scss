@@ -1,0 +1,19 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/_variables";
+
+
+.card-columns {
+    column-count: 10;
+}
+
+.lottery-button {
+    min-width: 60px;
+}
+
+.lottery-grid {
+    min-height: 600px;
+}
+
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active{
+    background-color: darken($light, 30);
+}
