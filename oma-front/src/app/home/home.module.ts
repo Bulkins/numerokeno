@@ -4,6 +4,7 @@ import { HomeViewComponent } from './components/home-view/home-view.component';
 import { CoreModule } from '../core/core.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GameBoardComponent } from './components/game-board/game-board.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { FormsModule } from '@angular/forms';
     HomeRoutingModule,
     FormsModule
   ],
-  declarations: [HomeViewComponent]
+  declarations: [HomeViewComponent, GameBoardComponent]
 })
 export class HomeModule { }

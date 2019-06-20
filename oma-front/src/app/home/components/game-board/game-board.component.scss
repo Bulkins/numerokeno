@@ -1,0 +1,10 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/_variables";
+
+.lottery-button {
+    min-width: 60px;
+}
+
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active{
+    background-color: darken($light, 30);
+}

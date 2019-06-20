@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-between align-items-center my-2" *ngFor="let row of lotteryMap; let i = index">
+  <ng-container *ngFor="let number of row; let j = index">
+    <button class="btn btn-lg btn-light lottery-button mr-2" (click)="selectNumber.emit(number)"
+      [ngClass]="{
+        'active selected': selectedNumbers.includes(number), 
+        'bg-warning': drawnNumbers.includes(number) && !selectedNumbers.includes(number), 
+        'bg-success font-weight-bold text-light': selectedNumbers.includes(number) && drawnNumbers.includes(number)}">
+        {{number | json}}
+    </button>
+  </ng-container>
+</div>

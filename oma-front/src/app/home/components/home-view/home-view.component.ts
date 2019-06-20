@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HighscoreService } from 'src/app/shared/services/highscore.service';
 import { UserScore } from 'src/app/shared/models/UserScore';
+import { Game } from 'src/app/shared/models/Game';
 
 @Component({
   selector: 'home-view',
@@ -9,7 +10,7 @@ import { UserScore } from 'src/app/shared/models/UserScore';
 })
 export class HomeViewComponent implements OnInit {
   highscores: UserScore[];
-  userScore: UserScore;
+  userScore: UserScore = new UserScore();
 
   lotteryMap: number[][];
   selectedNumbers: number[] = [];
@@ -20,45 +21,8 @@ export class HomeViewComponent implements OnInit {
   money: number = 5;
   winSize: number = 0;
   betSize: number = 0.2;
-  winRatiosPerHit: any = [
-    {
-      hits: 10,
-      winRatio: [50, 50, 40, 35, 14, 5, 2, 1, 0, 0]
-    },
-    {
-      hits: 9,
-      winRatio: [50, 50, 40, 20, 10, 3, 1, 0, 0]
-    },
-    {
-      hits: 8,
-      winRatio: [50, 40, 32, 15, 6, 1, 0, 0]
-    },
-    {
-      hits: 7,
-      winRatio: [45, 35, 15, 10, 2, 0, 0]
-    },
-    {
-      hits: 6,
-      winRatio: [40, 34, 14, 4, 0, 0]
-    },
-    {
-      hits: 5,
-      winRatio: [30, 15, 6, 1, 0]
-    },
-    {
-      hits: 4,
-      winRatio: [20, 11, 2, 0]
-    },
-    {
-      hits: 3,
-      winRatio: [18, 5, 0]
-    },
-    {
-      hits: 2,
-      winRatio: [9, 1]
-    }
-  ]
   drawing: boolean;
+  game: Game;
 
   constructor(
     private scoreService: HighscoreService
@@ -70,6 +34,8 @@ export class HomeViewComponent implements OnInit {
       this.highscores = highscores;
     })
 
+    this.game = new Game();
+
     // Lottery numbers in 2D array
     this.lotteryMap = [];
     for(let row=0; row <= 3; row++){
@@ -79,10 +45,9 @@ export class HomeViewComponent implements OnInit {
       }
       this.lotteryMap.push(rowNumbers);
     }
-    this.userScore = new UserScore();
   }
 
-  toggleNumber(lotteryNumber: number){
+  toggleSelectedNumber(lotteryNumber: number){
     if(!this.drawing){
       if(this.selectedNumbers.includes(lotteryNumber)){
         this.selectedNumbers.splice(this.selectedNumbers.indexOf(lotteryNumber), 1);
@@ -128,7 +93,7 @@ export class HomeViewComponent implements OnInit {
   }
 
   getWinRatiosPerHit(selected: number){
-    return this.winRatiosPerHit.find(x=>x.hits === selected)
+    return this.game.gameModes.find(x=>x.hits === selected)
   }
 
   raiseBet(){
@@ -165,6 +130,5 @@ export class HomeViewComponent implements OnInit {
     this.money = 5;
     this.clearSelections();
     this.drawnNumbers = [];
-    
   }
 }
